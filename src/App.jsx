@@ -10,7 +10,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/auth" element={<AuthLayout />}>
+        <Route path="/" element={<AuthLayout />}>
           <Route index element={<Login />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="forgot-password">

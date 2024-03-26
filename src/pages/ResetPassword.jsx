@@ -18,7 +18,7 @@ export const ResetPassword = () => {
     // Handle password reset functionality here
     setAuth({ ...auth, password: password });
     // For example, you can redirect the user to the login page
-    navigate("/auth");
+    navigate("/");
   };
 
   return (
