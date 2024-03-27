@@ -8,6 +8,7 @@ import { ActionButton } from "../components/ActionButton";
 import { Card } from "../layouts/Card";
 import { PasswordField } from "../components/PasswordField";
 import { FaAt, FaLock, FaUser } from "react-icons/fa6";
+import { useAuth } from "../context/AuthContext";
 
 const SignUp = () => {
   const [fullname, setFullname] = useState("");
@@ -15,6 +16,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
   const [error, setError] = useState(null);
+  const { setAlert } = useAuth();
 
   const handleSignUp = () => {
     // Handle SignUp functionality here
@@ -22,6 +24,11 @@ const SignUp = () => {
       setError("");
     } else {
       setError("Both passwords must match");
+      setAlert({
+        visibility: true,
+        type: "error",
+        message: "Both passwords must match",
+      });
     }
   };
 

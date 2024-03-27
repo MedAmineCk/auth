@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Background } from "../animation/Background";
 import GlassBlurContainer from "../animation/GlassBlurContainer";
+import { Alert } from "../components/Alert";
 
 const AuthLayout = () => {
   return (
@@ -9,7 +10,8 @@ const AuthLayout = () => {
         <Background />
         <GlassBlurContainer />
       </aside>
-      <div className="w-full lg:w-1/2 ">
+      <div className="w-full lg:w-1/2 relative flex justify-between items-center">
+        <Alert />
         <Outlet />
       </div>
     </div>

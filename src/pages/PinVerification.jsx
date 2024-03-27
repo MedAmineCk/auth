@@ -5,9 +5,10 @@ import { ActionButton } from "../components/ActionButton";
 import { LinkOutline } from "../components/LinkOutline";
 import PropTypes from "prop-types";
 import { useAuth } from "../context/AuthContext";
+import { Alert } from "../components/Alert";
 
 export const PinVerification = () => {
-  const { auth } = useAuth();
+  const { auth, setAlert } = useAuth();
   const navigate = useNavigate();
   const [pin, setPin] = useState({
     1: "",
@@ -18,35 +19,47 @@ export const PinVerification = () => {
   const handlePinVerification = () => {
     // Handle Pin verification functionality here
     navigate("reset-password");
+    setAlert({
+      visibility: true,
+      type: "success",
+      message: "Pin verified successfully",
+    });
   };
   return (
-    <Card label="Pin Verification">
-      <p className="mb-4 text-gray-500 ">
-        Type the 4 digit code sent to your email {auth.email}
-      </p>
-      <div className="flex gap-8 my-8 justify-center">
-        <InputDigit
-          value={pin["1"]}
-          onChange={(e) => setPin({ ...pin, 1: e.target.value })}
-        />
-        <InputDigit
-          value={pin["2"]}
-          onChange={(e) => setPin({ ...pin, 2: e.target.value })}
-        />
-        <InputDigit
-          value={pin["3"]}
-          onChange={(e) => setPin({ ...pin, 3: e.target.value })}
-        />
-        <InputDigit
-          value={pin["4"]}
-          onChange={(e) => setPin({ ...pin, 4: e.target.value })}
-        />
-      </div>
-      <ActionButton onClick={handlePinVerification}>Verify</ActionButton>
-      <div className="flex justify-end">
-        <LinkOutline link=".." text="Back" />
-      </div>
-    </Card>
+    <>
+      <Alert
+        type="info"
+        message={`please check your email for verification code at: ${auth.email}`}
+      />
+
+      <Card label="Pin Verification">
+        <p className="mb-4 text-gray-500 ">
+          Type the 4 digit code sent to your email {auth.email}
+        </p>
+        <div className="flex gap-8 my-8 justify-center">
+          <InputDigit
+            value={pin["1"]}
+            onChange={(e) => setPin({ ...pin, 1: e.target.value })}
+          />
+          <InputDigit
+            value={pin["2"]}
+            onChange={(e) => setPin({ ...pin, 2: e.target.value })}
+          />
+          <InputDigit
+            value={pin["3"]}
+            onChange={(e) => setPin({ ...pin, 3: e.target.value })}
+          />
+          <InputDigit
+            value={pin["4"]}
+            onChange={(e) => setPin({ ...pin, 4: e.target.value })}
+          />
+        </div>
+        <ActionButton onClick={handlePinVerification}>Verify</ActionButton>
+        <div className="flex justify-end">
+          <LinkOutline link=".." text="Back" />
+        </div>
+      </Card>
+    </>
   );
 };
 

@@ -7,12 +7,17 @@ import { LinkOutline } from "../components/LinkOutline";
 import { useAuth } from "../context/AuthContext";
 
 export const EmailVerification = () => {
-  const { auth, setAuth } = useAuth();
+  const { auth, setAuth, setAlert } = useAuth();
   const navigate = useNavigate();
 
   const handleEmailVerification = () => {
     // stock the email in context
     navigate("pin-verification/");
+    setAlert({
+      visibility: true,
+      type: "info",
+      message: `please check your email for verification code at: ${auth.email}`,
+    });
   };
 
   return (

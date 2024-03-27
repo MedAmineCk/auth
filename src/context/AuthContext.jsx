@@ -5,9 +5,14 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({ email: "", password: "" });
+  const [alert, setAlert] = useState({
+    visibility: false,
+    type: "",
+    message: "",
+  });
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider value={{ auth, setAuth, alert, setAlert }}>
       {children}
     </AuthContext.Provider>
   );

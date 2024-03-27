@@ -9,16 +9,30 @@ import { PasswordField } from "../components/PasswordField";
 import { FaLock } from "react-icons/fa6";
 
 export const ResetPassword = () => {
-  const { auth, setAuth } = useAuth();
+  const { auth, setAuth, setAlert } = useAuth();
   const [password, setPassword] = useState("");
   const [reTypedPassword, setReTypedPassword] = useState("");
   const navigate = useNavigate();
 
   const handleResetPassword = () => {
+    //check if password is valid and reTypedPassword is the same
+    if (password !== reTypedPassword) {
+      setAlert({
+        visibility: true,
+        type: "error",
+        message: "Both passwords should match",
+      });
+      return;
+    }
     // Handle password reset functionality here
     setAuth({ ...auth, password: password });
     // For example, you can redirect the user to the login page
     navigate("/");
+    setAlert({
+      visibility: true,
+      type: "success",
+      message: "Password reset successfully",
+    });
   };
 
   return (
